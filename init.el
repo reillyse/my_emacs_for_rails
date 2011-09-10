@@ -135,7 +135,7 @@ LIST defaults to all existing live buffers."
 (add-to-list  'load-path "~/.emacs.d/plugins/maxframe")
 (require 'maxframe)
 (add-hook 'window-setup-hook 'maximize-frame t)
-(add-hook 'window-setup-hook 'ecb-redraw-layout t)
+;;(add-hook 'window-setup-hook 'ecb-redraw-layout t)
 
 (set-background-color "#2b2b2b")
 (set-foreground-color "white")
@@ -175,18 +175,19 @@ LIST defaults to all existing live buffers."
 
 
 ;; ecb
-(add-to-list 'load-path "~/.emacs.d/plugins/ecb")
-(require 'ecb)
-(setq ecb-tip-of-the-day nil)
-(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
-(ecb-activate)
-(custom-set-variables
+;;(add-to-list 'load-path "~/.emacs.d/plugins/ecb")
+;;(require 'ecb)
+;;(setq ecb-tip-of-the-day nil)
+;;(setq ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
+;;(ecb-activate)
+;;(custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(ecb-layout-window-sizes (quote (("left8" (ecb-directories-buffer-name 0.23671497584541062 . 0.29310344827586204) (ecb-sources-buffer-name 0.23671497584541062 . 0.22413793103448276) (ecb-methods-buffer-name 0.23671497584541062 . 0.25862068965517243) (ecb-history-buffer-name 0.23671497584541062 . 0.20689655172413793)))))
- '(ecb-options-version "2.40"))
+;; '(ecb-auto-activate nil)
+;; '(ecb-layout-window-sizes (quote (("left8" (ecb-directories-buffer-name 0.23671497584541062 . 0.29310344827586204) (ecb-sources-buffer-name 0.23671497584541062 . 0.22413793103448276) (ecb-methods-buffer-name 0.23671497584541062 . 0.25862068965517243) (ecb-history-buffer-name 0.23671497584541062 . 0.20689655172413793)))))
+;; '(ecb-options-version "2.40"))
 ;; resize the windows on emacs and run ecb-store-window-sizes
 ; '(show-paren-mode t))
 
@@ -356,12 +357,6 @@ t)
 ;; ruby-mode-hook
 (add-hook 'ruby-mode-hook
          (lambda()
-           (add-hook 'write-file-functions
-                      '(lambda()
-                         (save-excursion
-                           (untabify (point-min) (point-max))
-                           (delete-trailing-whitespace)
-                           )))
            (set (make-local-variable 'indent-tabs-mode) 'nil)
            (set (make-local-variable 'tab-width) 2)
            (imenu-add-to-menubar "IMENU")
