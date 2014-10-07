@@ -6,12 +6,26 @@
 ;'(buffer-encoding (quote utf-8))
 '(recentf-mode t)
 '(transient-mark-mode t)
+ (setq ring-bell-function 'ignore)
 
-;(set-default-font "Bitstream Vera Sans Mono-10")
-;(set-fontset-font (frame-parameter nil 'font)
-;  'han '("cwTeXHeiBold" . "unicode-bmp"))
+(require 'package)
+(add-to-list 'package-archives 
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
-(setq make-backup-files nil)
+(require 'haml-mode)
+;; (set-default-font "Bitstream Vera Sans Mono-10")
+;; (set-fontset-font (frame-parameter nil 'font)
+;;  'han '("cwTeXHeiBold" . "unicode-bmp"))
+
+(setq backup-directory-alist `(("." . "~/.saves")))
+(setq backup-by-copying t)
+(setq delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)
+
 (setq query-replace-highlight t)
 (setq search-highlight t)
 (setq font-lock-maximum-decoration t)
@@ -139,8 +153,8 @@ LIST defaults to all existing live buffers."
 
 (set-background-color "#2b2b2b")
 (set-foreground-color "white")
-(set-face-background 'modeline "DarkRed")
-(set-face-foreground 'modeline "white")
+;; (set-face-background 'modeline "DarkRed")
+;; (set-face-foreground 'modeline "white")
 ;; color-theme
 ;(add-to-list  'load-path "~/.emacs.d/plugins/color-theme")
 ;(require 'color-theme)
@@ -166,7 +180,8 @@ LIST defaults to all existing live buffers."
 
 ;; cedet
 ;; See cedet/common/cedet.info for configuration details.
-(load-file "~/.emacs.d/plugins/cedet/common/cedet.el")
+(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
+(semantic-load-enable-excessive-code-helpers)
 ; Enable EDE (Project Management) features
 ;(global-ede-mode 1)
 ;; * This enables the database and idle reparse engines
@@ -564,9 +579,20 @@ makes)."
 ;(kill-buffer "*Messages*")
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
 
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ecb-auto-activate t))
+(require 'coffee-mode')
